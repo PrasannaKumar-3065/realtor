@@ -1,0 +1,105 @@
+Build a property map feature for my real estate website using Leaflet.js (OpenStreetMap, free — no API key required).
+
+CONTEXT:
+I have two pages:
+
+1. All Properties Page (list of properties with filters)
+2. Property Detail Page (single property view)
+
+GOAL:
+Add an interactive map to BOTH pages.
+
+---
+
+FEATURES REQUIRED:
+
+1. ALL PROPERTIES PAGE MAP:
+
+* Show a map at the top or beside the property listings
+* Display markers for ALL properties currently filtered (city, type, etc.)
+* When clicking a marker:
+
+  * Show popup with:
+
+    * Property title
+    * Price
+    * Location
+    * "View Details" link → navigates to property detail page
+
+2. PROPERTY DETAIL PAGE MAP:
+
+* Show a map with ONE marker for that property
+* Popup should show:
+
+  * Property name
+  * Price
+  * Location
+
+3. DATA FORMAT:
+   Assume properties array like:
+   [
+   {
+   id: 1,
+   title: "DTCP Approved Plot - T.Vadipatti",
+   city: "Madurai",
+   lat: 9.9252,
+   lng: 78.1198,
+   price: "₹12 Lakhs",
+   slug: "dtcp-plot-tvadipatti"
+   }
+   ]
+
+4. FILTERING:
+
+* Map should only show properties currently filtered (same as listing)
+* Example:
+  selectedCity === "Madurai" → only show Madurai markers
+
+5. UI BEHAVIOR:
+
+* Center map based on selected city
+* Zoom appropriately (city level)
+* If only 1 property → zoom closer
+
+6. TECH STACK:
+
+* Use Leaflet.js (CDN)
+* Use OpenStreetMap tiles
+* No Google Maps
+* No API keys
+
+---
+
+IMPLEMENTATION DETAILS:
+
+* Add Leaflet CDN:
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+* Create reusable function:
+  initMap(properties, containerId)
+
+* Loop through properties:
+  L.marker([lat, lng]).addTo(map)
+
+* Popup HTML: <b>{title}</b><br/>
+  {price}<br/>
+  {city}<br/> <a href="/property/{slug}">View Details</a>
+
+---
+
+OUTPUT REQUIRED:
+
+1. Full JS code for map initialization
+2. HTML container examples for both pages
+3. Integration instructions for my existing property list page
+4. Clean, production-ready code (not pseudo code)
+
+---
+
+IMPORTANT:
+
+* Keep it lightweight
+* No unnecessary libraries
+* Make sure markers update when filters change

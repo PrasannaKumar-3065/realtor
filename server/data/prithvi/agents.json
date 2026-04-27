@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ag-1",
+    "name": "Karthik Murugan",
+    "role": "Senior Property Advisor",
+    "phone": "+91 98421 00001",
+    "email": "karthik@prithvirealestate.in",
+    "bio": "Specialist in agricultural and residential land across Madurai district.",
+    "image": ""
+  },
+  {
+    "id": "ag-2",
+    "name": "Radha Selvam",
+    "role": "Legal & Documentation Head",
+    "phone": "+91 98421 00002",
+    "email": "radha@prithvirealestate.in",
+    "bio": "Expert in DTCP approvals, patta transfers, and property registration.",
+    "image": ""
+  }
+]

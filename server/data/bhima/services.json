@@ -1,0 +1,50 @@
+[
+  {
+    "id": "bs-1",
+    "title": "Architecture",
+    "description": "Professional architectural design and planning for residential and commercial spaces.",
+    "icon": "🏛️"
+  },
+  {
+    "id": "bs-2",
+    "title": "Landscape Design",
+    "description": "Beautiful, functional landscape design that enhances your property value.",
+    "icon": "🌿"
+  },
+  {
+    "id": "bs-3",
+    "title": "Exterior Design",
+    "description": "Striking exterior finishes that give your property lasting curb appeal.",
+    "icon": "🏠"
+  },
+  {
+    "id": "bs-4",
+    "title": "Structural Planning",
+    "description": "Safe, efficient structural engineering for all building types.",
+    "icon": "📐"
+  },
+  {
+    "id": "bs-5",
+    "title": "Interior & Furniture Design",
+    "description": "Custom interior design solutions tailored to your lifestyle and taste.",
+    "icon": "🛋️"
+  },
+  {
+    "id": "bs-6",
+    "title": "Legal & Registration",
+    "description": "Expert legal opinion, title verification, and registration assistance.",
+    "icon": "⚖️"
+  },
+  {
+    "id": "bs-7",
+    "title": "Vaastu Consulting",
+    "description": "Traditional Vaastu principles integrated into modern property planning.",
+    "icon": "🔱"
+  },
+  {
+    "id": "bs-8",
+    "title": "Property Consulting",
+    "description": "End-to-end advisory for buying, selling and investing in property.",
+    "icon": "📊"
+  }
+]

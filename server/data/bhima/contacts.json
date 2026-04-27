@@ -1,0 +1,20 @@
+[
+  {
+    "id": "bc-1",
+    "label": "Main Office",
+    "number": "+91 82303 00000",
+    "type": "Office"
+  },
+  {
+    "id": "bc-2",
+    "label": "WhatsApp",
+    "number": "+91 82303 00000",
+    "type": "WhatsApp"
+  },
+  {
+    "id": "bc-3",
+    "label": "Sales",
+    "number": "+91 82303 00001",
+    "type": "Sales"
+  }
+]

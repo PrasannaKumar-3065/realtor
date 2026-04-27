@@ -1,0 +1,24 @@
+[
+  {
+    "id": "pa-1",
+    "name": "Ravi Krishnamurthy",
+    "role": "Senior Sales Executive",
+    "experience": "8 Years",
+    "specialty": "Luxury Apartments",
+    "areas": "Bangalore, Whitefield",
+    "phone": "+91 98765 43210",
+    "email": "ravi@priyaestates.in",
+    "image": ""
+  },
+  {
+    "id": "pa-2",
+    "name": "Sneha Patel",
+    "role": "Property Consultant",
+    "experience": "5 Years",
+    "specialty": "Commercial Properties",
+    "areas": "Pune, Hinjewadi",
+    "phone": "+91 98765 43211",
+    "email": "sneha@priyaestates.in",
+    "image": ""
+  }
+]

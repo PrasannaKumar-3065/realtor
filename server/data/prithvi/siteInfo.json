@@ -1,0 +1,26 @@
+{
+  "agencyName": "Prithvi Real Estate",
+  "tagline": "Growing Roots in Tamil Nadu Soil",
+  "about": "Prithvi Real Estate is a Madurai-based property consultancy specializing in DTCP approved layouts, agricultural land, and residential properties across Tamil Nadu. We connect buyers with verified, clear-title properties and provide full legal support from purchase to registration.",
+  "address": "No. 5, Kamarajar Salai, Anna Nagar, Madurai – 625 020",
+  "phone": "+91 98421 00000",
+  "email": "info@prithvirealestate.in",
+  "whatsapp": "+91 98421 00000",
+  "established": "2012",
+  "areasOfOperation": [
+    "Madurai",
+    "Sivaganga",
+    "Dindigul",
+    "Virudhunagar",
+    "Theni",
+    "Ramanathapuram"
+  ],
+  "propertyTypes": [
+    "Commercial Land",
+    "Residential Plots",
+    "Flats / Apartments",
+    "Independent House",
+    "Farm / Agricultural Land",
+    "Industrial Land"
+  ]
+}

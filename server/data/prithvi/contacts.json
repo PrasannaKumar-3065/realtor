@@ -1,0 +1,20 @@
+[
+  {
+    "id": "pc-1",
+    "label": "Main Office",
+    "number": "+91 98421 00000",
+    "type": "Office"
+  },
+  {
+    "id": "pc-2",
+    "label": "WhatsApp",
+    "number": "+91 98421 00000",
+    "type": "WhatsApp"
+  },
+  {
+    "id": "pc-3",
+    "label": "Sales",
+    "number": "+91 98421 00001",
+    "type": "Sales"
+  }
+]

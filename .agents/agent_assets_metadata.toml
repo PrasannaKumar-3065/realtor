@@ -1,0 +1,56 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "V-60WMyO6b7ALTG8OkJqM"
+uri = "file://artifacts/realestate-landing/public/images/plot-whitefield.png"
+type = "image"
+title = "residential plot of land"
+
+[[generated]]
+id = "Hyp44k5nILrnDr_uicYJP"
+uri = "file://artifacts/realestate-landing/public/images/apt-koramangala.png"
+type = "image"
+title = "3bhk apartment exterior"
+
+[[generated]]
+id = "24hoMX6VA4yuqnyc_jHII"
+uri = "file://artifacts/realestate-landing/public/images/villa-banjara.png"
+type = "image"
+title = "4bhk independent villa"
+
+[[generated]]
+id = "h4yBhNpL3crGDkAH5TnMC"
+uri = "file://artifacts/realestate-landing/public/images/apt-hinjewadi.png"
+type = "image"
+title = "2bhk apartment balcony"
+
+[[generated]]
+id = "HVSIGRlwwyUhPAPkNM0Hr"
+uri = "file://artifacts/realestate-landing/public/images/row-house.png"
+type = "image"
+title = "modern row house"
+
+[[generated]]
+id = "v-dlvXciy1KG4BcjaN8kt"
+uri = "file://artifacts/realestate-landing/public/images/gated-community.png"
+type = "image"
+title = "gated community entrance"
+
+[[generated]]
+id = "HN9_v23hj7cCIa8qZ1Ic1"
+uri = "file://artifacts/realestate-landing/public/images/agent-ramesh.png"
+type = "image"
+title = "middle aged male agent"
+
+[[generated]]
+id = "BY8HgZ3k0_UAqd4puuHVV"
+uri = "file://artifacts/realestate-landing/public/images/agent-sunita.png"
+type = "image"
+title = "female agent in 30s"
+
+[[generated]]
+id = "-IKrCFHglFcPqcuL_AGcD"
+uri = "file://artifacts/realestate-landing/public/images/agent-pradeep.png"
+type = "image"
+title = "professional male agent in 40s"

@@ -1,0 +1,299 @@
+[
+  {
+    "id": "bhima-1",
+    "title": "Blu Bell Premium Apartments – 3 BHK",
+    "type": "Flats / Apartments",
+    "status": "Booking Open",
+    "price": "₹75 Lakhs",
+    "priceValue": 7500000,
+    "location": "Bypass Road, Madurai",
+    "city": "Madurai",
+    "area": "1,450 Sq.ft.",
+    "bedrooms": "3",
+    "bathrooms": "3",
+    "facing": "East",
+    "floor": "3rd – 8th Floor",
+    "project": "Blu Bell Apartments",
+    "description": "Premium 3 BHK apartments in the flagship Blu Bell Apartments project by Bhima Homes. Located on the Bypass Road, these homes offer the perfect blend of modern architecture and lifestyle comfort.\n\nKey Highlights:\n• Spacious 1,450 sq.ft. layouts with premium finishes\n• Swimming pool and toddler pool\n• 24/7 security with CCTV\n• Indoor gym with panoramic views\n• Terrace party hall\n• Children's play area and landscaped gardens\n• TNRERA approved project",
+    "landmarks": [
+      "School",
+      "Hospital",
+      "Shopping Mall",
+      "Bank",
+      "Bus Stop",
+      "Highway"
+    ],
+    "nearbyPlaces": [
+      "Bypass Road – direct access",
+      "Major shopping malls – 5 min",
+      "Schools and colleges – walking distance",
+      "Hospitals – 10 min"
+    ],
+    "amenities": [
+      "Swimming Pool",
+      "Gym",
+      "24/7 Security",
+      "CCTV",
+      "Terrace Party Hall",
+      "Children's Play Area",
+      "Landscaped Gardens",
+      "Power Backup"
+    ],
+    "tags": [
+      "TNRERA Approved",
+      "Premium",
+      "Gated Community",
+      "Swimming Pool",
+      "3 BHK",
+      "Ready to Move"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&q=80"
+    ],
+    "youtubeLinks": [],
+    "featured": true
+  },
+  {
+    "id": "bhima-2",
+    "title": "Blu Bell Apartments – 2 BHK Studio",
+    "type": "Studio Apartments",
+    "status": "Booking Open",
+    "price": "₹52 Lakhs",
+    "priceValue": 5200000,
+    "location": "Bypass Road, Madurai",
+    "city": "Madurai",
+    "area": "980 Sq.ft.",
+    "bedrooms": "2",
+    "bathrooms": "2",
+    "facing": "West",
+    "floor": "1st – 5th Floor",
+    "project": "Blu Bell Apartments",
+    "description": "Thoughtfully designed 2 BHK studio apartments in the Blu Bell project — ideal for working professionals and young families.\n\n• Well-planned 980 sq.ft. floor plan\n• Modern kitchen with granite countertops\n• Vitrified tile flooring throughout\n• Premium bathroom fittings\n• Dedicated parking for all units\n• Vastu-compliant design",
+    "landmarks": [
+      "School",
+      "Hospital",
+      "Shopping Mall",
+      "Bank",
+      "Bus Stop"
+    ],
+    "nearbyPlaces": [
+      "Bypass Road – 2 min",
+      "City center – 15 min",
+      "Railway station – 20 min"
+    ],
+    "amenities": [
+      "Swimming Pool",
+      "Gym",
+      "24/7 Security",
+      "Parking",
+      "Power Backup",
+      "CCTV"
+    ],
+    "tags": [
+      "2 BHK",
+      "Studio",
+      "Affordable",
+      "Vastu Compliant",
+      "Booking Open"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1200&q=80",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1200&q=80"
+    ],
+    "youtubeLinks": [],
+    "featured": true
+  },
+  {
+    "id": "bhima-3",
+    "title": "4 BHK Independent Villa – Anna Nagar",
+    "type": "Independent House",
+    "status": "Available",
+    "price": "₹1.8 Cr",
+    "priceValue": 18000000,
+    "location": "Anna Nagar, Madurai",
+    "city": "Madurai",
+    "area": "2,800 Sq.ft.",
+    "bedrooms": "4",
+    "bathrooms": "4",
+    "facing": "North",
+    "floor": "G+2",
+    "project": "",
+    "description": "Elegant G+2 independent villa in Anna Nagar, one of Madurai's most prestigious localities.\n\n• 2,800 sq.ft. built-up area on 2,400 sq.ft. plot\n• Italian marble flooring in living areas\n• Modular kitchen with chimney\n• Terrace garden with city views\n• 2-car garage\n• Solar panels and rainwater harvesting",
+    "landmarks": [
+      "School",
+      "Hospital",
+      "Shopping Mall",
+      "Bank",
+      "Park"
+    ],
+    "nearbyPlaces": [
+      "Anna Nagar market – 5 min",
+      "Top schools – walking distance",
+      "Hospitals – 10 min"
+    ],
+    "amenities": [
+      "Terrace Garden",
+      "2-Car Garage",
+      "Solar Panels",
+      "Rainwater Harvesting",
+      "CCTV"
+    ],
+    "tags": [
+      "Independent House",
+      "4 BHK",
+      "Anna Nagar",
+      "Premium Villa",
+      "G+2",
+      "Vastu Compliant"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80"
+    ],
+    "youtubeLinks": [],
+    "featured": true
+  },
+  {
+    "id": "bhima-4",
+    "title": "Commercial Shop Space – Avaniyapuram",
+    "type": "Commercial Shops",
+    "status": "Available",
+    "price": "₹45 Lakhs",
+    "priceValue": 4500000,
+    "location": "Avaniyapuram Main Road, Madurai",
+    "city": "Madurai",
+    "area": "650 Sq.ft.",
+    "bedrooms": "",
+    "bathrooms": "1",
+    "facing": "East",
+    "floor": "Ground Floor",
+    "project": "",
+    "description": "Prime ground-floor commercial shop on Avaniyapuram Main Road.\n\n• 650 sq.ft. with 22-foot frontage\n• 24-hour power supply with DG backup\n• Ample parking for customers\n• High footfall zone",
+    "landmarks": [
+      "Bus Stop",
+      "Bank",
+      "Shopping Mall",
+      "Highway"
+    ],
+    "nearbyPlaces": [
+      "Avaniyapuram bus stand – 2 min",
+      "Major banks – adjacent"
+    ],
+    "amenities": [
+      "Power Backup",
+      "24/7 Access",
+      "CCTV"
+    ],
+    "tags": [
+      "Commercial",
+      "Ground Floor",
+      "High Footfall",
+      "Main Road",
+      "22ft Frontage"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80"
+    ],
+    "youtubeLinks": [],
+    "featured": true
+  },
+  {
+    "id": "bhima-5",
+    "title": "Residential Plot – Airport Road",
+    "type": "Residential Plots",
+    "status": "Available",
+    "price": "₹38 Lakhs",
+    "priceValue": 3800000,
+    "location": "Airport Road, Madurai",
+    "city": "Madurai",
+    "area": "2,400 Sq.ft. (40×60)",
+    "bedrooms": "",
+    "bathrooms": "",
+    "facing": "North",
+    "floor": "",
+    "project": "DTCP Approved Layout",
+    "description": "DTCP approved residential plot in a premium gated layout on Airport Road.\n\n• 40×60 North-facing plot\n• Black top tar roads\n• Underground drainage and water connection\n• 24/7 security\n• Street lighting throughout",
+    "landmarks": [
+      "Airport",
+      "Hospital",
+      "School",
+      "Highway",
+      "Bank"
+    ],
+    "nearbyPlaces": [
+      "Madurai International Airport – 5 min",
+      "IT Park – 10 min",
+      "City center – 20 min"
+    ],
+    "amenities": [
+      "24/7 Security",
+      "Underground Drainage",
+      "Street Lighting",
+      "Black Top Roads"
+    ],
+    "tags": [
+      "DTCP Approved",
+      "Residential",
+      "Airport Road",
+      "North Facing",
+      "Gated Layout",
+      "40×60"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=80",
+      "https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=1200&q=80"
+    ],
+    "youtubeLinks": [],
+    "featured": true
+  },
+  {
+    "id": "bhima-6",
+    "title": "Office Space – Mattuthavani Business Hub",
+    "type": "Office Space",
+    "status": "Available",
+    "price": "₹1.2 Cr",
+    "priceValue": 12000000,
+    "location": "Mattuthavani, Madurai",
+    "city": "Madurai",
+    "area": "1,800 Sq.ft.",
+    "bedrooms": "",
+    "bathrooms": "2",
+    "facing": "South",
+    "floor": "4th Floor",
+    "project": "Business Hub Tower",
+    "description": "Modern, ready-to-occupy office space in the thriving Mattuthavani business district.\n\n• Open-plan layout with modular partitions\n• High-speed fiber optic internet ready\n• 2 dedicated parking slots\n• Centralized AC\n• Conference room with projector",
+    "landmarks": [
+      "Bus Stop",
+      "Bank",
+      "Hospital",
+      "Airport"
+    ],
+    "nearbyPlaces": [
+      "Mattuthavani bus terminus – 5 min",
+      "Madurai Airport – 15 min"
+    ],
+    "amenities": [
+      "Centralized AC",
+      "Fiber Internet",
+      "Conference Room",
+      "Parking",
+      "Power Backup",
+      "CCTV"
+    ],
+    "tags": [
+      "Office Space",
+      "Premium",
+      "Mattuthavani",
+      "Ready to Move",
+      "IT Ready"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80",
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80"
+    ],
+    "youtubeLinks": [],
+    "featured": false
+  }
+]

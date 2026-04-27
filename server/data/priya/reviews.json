@@ -1,0 +1,23 @@
+[
+  {
+    "id": "pr-1",
+    "name": "Arun Mehta",
+    "purchase": "3BHK Apartment, Whitefield",
+    "text": "Priya Estates made our home buying journey absolutely smooth. Professional, transparent and genuinely caring.",
+    "rating": 5
+  },
+  {
+    "id": "pr-2",
+    "name": "Divya Nair",
+    "purchase": "Studio, Hyderabad",
+    "text": "Found my perfect studio in just one visit. The team understood exactly what I needed.",
+    "rating": 5
+  },
+  {
+    "id": "pr-3",
+    "name": "Ramesh Babu",
+    "purchase": "Villa, Electronic City",
+    "text": "Premium service for a premium property. Highly recommended for luxury seekers.",
+    "rating": 4
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "agencyName": "Bhima Homes and Properties",
+  "tagline": "Building Foundations That Last",
+  "about": "Bhima Homes and Properties is a property development company led by professionals including Architects, Civil Engineers, and elite real estate consultants. Since 2010, we have been dealing in all types of properties based on buyer requirements. We also serve post-property buying needs — technical verification, legal opinions, and registration/approval processes.",
+  "address": "52A, 120 feet Surveyor Colony Road, Mattuthavani, Madurai",
+  "phone": "+91 82303 00000",
+  "email": "info@bhimahomes.in",
+  "whatsapp": "+91 82303 00000",
+  "established": "2010",
+  "areasOfOperation": [
+    "Agrini, Madurai",
+    "Airport Road, Madurai",
+    "Alagar Kovil, Madurai",
+    "Alagappan Nagar, Madurai",
+    "Alanganallur, Madurai",
+    "Anna Nagar, Madurai",
+    "Avaniyapuram, Madurai",
+    "Bypass Road, Madurai",
+    "Doak Nagar, Madurai",
+    "Duraisamy Nagar, Madurai",
+    "Mattuthavani, Madurai",
+    "Coimbatore"
+  ],
+  "propertyTypes": [
+    "Flats / Apartments",
+    "Independent House",
+    "Builder Floor",
+    "Farm House",
+    "Commercial Shops",
+    "Showroom",
+    "Office Space",
+    "Residential Plots",
+    "Farm / Agricultural Land",
+    "Commercial Plots",
+    "Penthouse",
+    "Studio Apartments",
+    "Warehouse / Godown",
+    "Hotel & Restaurant"
+  ]
+}
