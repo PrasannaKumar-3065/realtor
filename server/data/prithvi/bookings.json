@@ -1,0 +1,26 @@
+[
+  {
+    "id": "booking-mohpmfxxx11ykabu4e",
+    "agency": "prithvi",
+    "name": "DB Booking",
+    "phone": "9999999998",
+    "propertyId": "prithvi-1",
+    "propertyTitle": "DB FIXED 1777325304564",
+    "date": "2026-05-09",
+    "time": "11:00 AM",
+    "status": "pending",
+    "createdAt": "2026-04-27T21:29:08.662Z"
+  },
+  {
+    "id": "booking-mohpwa2xu7mad6oebpk",
+    "agency": "prithvi",
+    "name": "Prasanna",
+    "phone": "9791521808",
+    "propertyId": "prithvi-003",
+    "propertyTitle": "Spacious Independent Villa with Garden",
+    "date": "2026-04-29",
+    "time": "10:00 AM",
+    "status": "pending",
+    "createdAt": "2026-04-27T21:36:47.625Z"
+  }
+]

@@ -1,0 +1,9 @@
+ property_id |                    title                     |    price    |        location         |   city    
+-------------+----------------------------------------------+-------------+-------------------------+-----------
+ prithvi-001 | Modern Luxury Apartment in Bangalore         |  7500000.00 | Whitefield, Bangalore   | Bangalore
+ prithvi-002 | Commercial Plot for Retail Business          |  5200000.00 | Indiranagar, Bangalore  | Bangalore
+ prithvi-003 | Spacious Independent Villa with Garden       | 12500000.00 | Koramangala, Bangalore  | Bangalore
+ prithvi-004 | Affordable Studio in Tech Park               |  2800000.00 | Marathahalli, Bangalore | Bangalore
+ prithvi-1   | DTCP Approved Residential Plot – T.Vadipatti |  1200000.00 | T.Vadipatti, Madurai    | Madurai
+(5 rows)
+

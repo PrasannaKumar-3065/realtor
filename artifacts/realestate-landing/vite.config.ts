@@ -30,7 +30,9 @@ if (!basePath) {
   );
 }
 
-const API_PORT = process.env.API_PORT || "8080";
+// Backend API server port (default is the Express server in `/server`).
+// Using 3001 as default matches `server/.env` in this repo.
+const API_PORT = process.env.API_PORT || "3001";
 
 export default defineConfig({
   base: basePath,
@@ -74,12 +76,13 @@ export default defineConfig({
     },
     proxy: {
       "/api": {
-        target: `http://localhost:${API_PORT}`,
+        // Use 127.0.0.1 to avoid occasional IPv6/IPv4 localhost resolution issues.
+        target: `http://127.0.0.1:${API_PORT}`,
         changeOrigin: true,
         secure: false,
       },
       "/uploads": {
-        target: `http://localhost:${API_PORT}`,
+        target: `http://127.0.0.1:${API_PORT}`,
         changeOrigin: true,
         secure: false,
       },

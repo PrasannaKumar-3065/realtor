@@ -9,6 +9,9 @@ const path = require("path");
 const propertiesRouter = require("./routes/properties");
 const configRouter = require("./routes/config");
 const uploadRouter = require("./routes/upload");
+const leadsRouter = require("./routes/leads");
+const bookingsRouter = require("./routes/bookings");
+const analyticsRouter = require("./routes/analytics");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -27,6 +30,9 @@ app.use("/uploads", express.static(UPLOADS_DIR));
 app.use("/api/upload", uploadRouter);
 app.use("/api/:agency/properties", propertiesRouter);
 app.use("/api/:agency/config", configRouter);
+app.use("/api/:agency/leads", leadsRouter);
+app.use("/api/:agency/bookings", bookingsRouter);
+app.use("/api/:agency/analytics", analyticsRouter);
 
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });

@@ -52,4 +52,15 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// POST /api/:agency/properties/:id/view — increment view counter
+router.post("/:id/view", async (req, res) => {
+  try {
+    const { agency, id } = req.params;
+    await db.incrementPropertyField(agency, id, "views");
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 module.exports = router;

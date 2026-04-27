@@ -1,0 +1,236 @@
+Upgrade my existing real estate website into a production-ready "Real Estate Lead Generation + CRM System".
+
+IMPORTANT:
+
+* Do NOT rewrite everything from scratch
+* Extend the current project structure cleanly
+* Keep UI consistent with existing design
+* Focus on functionality + backend integration
+
+---
+
+CORE OBJECTIVE:
+Transform the site from a listing website into a system that:
+
+1. Captures leads
+2. Manages leads (mini CRM)
+3. Enables site visit bookings
+4. Helps convert users (EMI, trust signals)
+
+---
+
+FEATURES TO IMPLEMENT:
+
+========================
+
+1. LEAD CAPTURE SYSTEM
+   ========================
+
+* Add a reusable LeadForm component:
+  Fields:
+
+  * name
+  * phone (required)
+  * email (optional)
+  * message
+  * propertyId (hidden)
+
+* Add triggers:
+
+  * "Request Details"
+  * "Download Brochure"
+  * "Get Best Price"
+
+* Save leads to backend (database)
+
+* After submit:
+
+  * Show success message
+  * Trigger WhatsApp redirect:
+    https://wa.me/<agent_number>?text=I am interested in {property_title}
+
+---
+
+========================
+2. SITE VISIT BOOKING SYSTEM
+============================
+
+* Add "Schedule Visit" button on property page
+
+* Modal form:
+
+  * name
+  * phone
+  * date picker
+  * time slot dropdown
+
+* Save booking in database
+
+* Status field:
+
+  * pending
+  * confirmed
+  * completed
+
+---
+
+========================
+3. ADMIN DASHBOARD (PROTECTED ROUTE)
+====================================
+
+Create /admin route with:
+
+A. Property Management:
+
+* Add / edit / delete property
+* Upload images
+* Add lat/lng
+
+B. Lead Management:
+
+* Table view:
+
+  * name
+  * phone
+  * property
+  * date
+  * status
+* Status update:
+
+  * new
+  * contacted
+  * visit scheduled
+  * closed
+
+C. Booking Management:
+
+* View all site visits
+* Update status
+
+---
+
+========================
+4. EMI CALCULATOR (PROPERTY PAGE)
+=================================
+
+* Inputs:
+
+  * property price (auto-filled)
+  * interest rate
+  * tenure (years)
+
+* Output:
+
+  * monthly EMI
+
+* Update dynamically
+
+---
+
+========================
+5. MAP INTEGRATION (LEAFLET)
+============================
+
+* Already implemented or add if missing:
+
+  * Property detail page → single marker
+  * Listing page → multiple markers
+
+* Marker popup:
+
+  * title
+  * price
+  * link to detail page
+
+---
+
+========================
+6. DATABASE DESIGN
+==================
+
+Create tables:
+
+properties:
+
+* id
+* title
+* city
+* price
+* lat
+* lng
+* description
+
+leads:
+
+* id
+* name
+* phone
+* email
+* propertyId
+* status
+* createdAt
+
+bookings:
+
+* id
+* name
+* phone
+* propertyId
+* date
+* time
+* status
+
+---
+
+========================
+7. API ENDPOINTS
+================
+
+POST /api/leads
+GET /api/leads
+PATCH /api/leads/:id
+
+POST /api/bookings
+GET /api/bookings
+PATCH /api/bookings/:id
+
+CRUD /api/properties
+
+---
+
+========================
+8. UX IMPROVEMENTS
+==================
+
+* Sticky "Contact / WhatsApp" button
+* Highlight "Verified Property"
+* Add "Download Brochure" CTA
+* Mobile-first responsiveness
+
+---
+
+========================
+9. SECURITY + BASICS
+====================
+
+* Simple admin login (JWT or session)
+* Input validation
+* Error handling
+
+---
+
+OUTPUT REQUIRED:
+
+* Clean modular code
+* Frontend + backend integration
+* Reusable components
+* No placeholder logic
+* Production-ready structure
+
+---
+
+IMPORTANT:
+
+* Keep everything scalable
+* Do not overcomplicate
+* Focus on real-world usability for real estate agents

@@ -1,10 +1,18 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { useParams, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, ChevronLeft, ChevronRight, Phone, Mail, Play, X, Plane, School, ShoppingBag, Landmark, Bus, Hospital, Tag } from "lucide-react";
+import {
+  MapPin, ChevronLeft, ChevronRight, Phone, Mail, Play, X,
+  Plane, School, ShoppingBag, Landmark, Bus, Hospital, Tag,
+  CalendarCheck, FileText, BadgeCheck, MessageCircle
+} from "lucide-react";
 import PrithviNavbar from "@/components/prithvi/PrithviNavbar";
 import PrithviFooter from "@/components/prithvi/PrithviFooter";
+import LeadFormModal from "@/components/prithvi/LeadFormModal";
+import VisitBookingModal from "@/components/prithvi/VisitBookingModal";
+import EMICalculator from "@/components/prithvi/EMICalculator";
 import { usePrithvi, parseYouTubeEmbed, getYouTubeThumbnail } from "@/store/prithviStore";
+import { api } from "@/api/client";
 
 const PrithviMap = lazy(() => import("@/components/prithvi/PrithviMap"));
 
@@ -22,14 +30,24 @@ type MediaItem =
   | { kind: "image"; src: string; index: number }
   | { kind: "video"; url: string; embed: string; thumb: string; index: number };
 
+type LeadTrigger = "request-details" | "best-price" | "brochure" | "general";
+
 export default function PrithviPropertyDetail() {
   const params = useParams<{ id: string }>();
   const { properties, siteInfo } = usePrithvi();
   const property = properties.find((p) => p.id === params.id);
 
+  useEffect(() => {
+    if (property?.id) {
+      api.trackPropertyView("prithvi", property.id).catch(() => {});
+    }
+  }, [property?.id]);
+
   const [activeMedia, setActiveMedia] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [leadModal, setLeadModal] = useState<{ open: boolean; trigger: LeadTrigger }>({ open: false, trigger: "general" });
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   if (!property) {
     return (
@@ -43,7 +61,8 @@ export default function PrithviPropertyDetail() {
     );
   }
 
-  // Build media array: images first, then videos
+  const openLead = (trigger: LeadTrigger) => setLeadModal({ open: true, trigger });
+
   const mediaItems: MediaItem[] = [
     ...property.images.map((src, i) => ({ kind: "image" as const, src, index: i })),
     ...property.youtubeLinks
@@ -57,7 +76,6 @@ export default function PrithviPropertyDetail() {
   ];
 
   const current = mediaItems[activeMedia];
-
   const prevMedia = () => setActiveMedia((i) => (i - 1 + mediaItems.length) % mediaItems.length);
   const nextMedia = () => setActiveMedia((i) => (i + 1) % mediaItems.length);
 
@@ -75,13 +93,12 @@ export default function PrithviPropertyDetail() {
           <span className="text-gray-800 font-medium line-clamp-1">{property.title}</span>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 md:px-6 pb-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 pb-24">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Left: Media + Details */}
             <div className="lg:col-span-2 space-y-6">
               {/* Media Gallery */}
               <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
-                {/* Main Display */}
                 <div className="relative bg-black" style={{ aspectRatio: "16/9" }}>
                   {mediaItems.length === 0 ? (
                     <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=80" alt={property.title} className="w-full h-full object-cover opacity-70" />
@@ -103,6 +120,11 @@ export default function PrithviPropertyDetail() {
                     />
                   ) : null}
 
+                  {/* Verified badge */}
+                  <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-green-700 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
+                    <BadgeCheck className="w-3.5 h-3.5" /> Verified Property
+                  </div>
+
                   {mediaItems.length > 1 && (
                     <>
                       <button onClick={prevMedia} className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors">
@@ -118,7 +140,6 @@ export default function PrithviPropertyDetail() {
                   )}
                 </div>
 
-                {/* Thumbnails */}
                 {mediaItems.length > 1 && (
                   <div className="flex gap-2 p-3 overflow-x-auto">
                     {mediaItems.map((item, i) => (
@@ -135,9 +156,7 @@ export default function PrithviPropertyDetail() {
                           <div className="relative w-full h-full bg-black">
                             <img src={item.thumb} alt="" className="w-full h-full object-cover opacity-80" />
                             <div className="absolute inset-0 flex items-center justify-center">
-                              <div className="bg-red-600 text-white rounded-full p-1">
-                                <Play className="w-3 h-3 fill-white" />
-                              </div>
+                              <div className="bg-red-600 text-white rounded-full p-1"><Play className="w-3 h-3 fill-white" /></div>
                             </div>
                           </div>
                         )}
@@ -165,8 +184,37 @@ export default function PrithviPropertyDetail() {
                   <div><div className="text-xs text-gray-400 mb-1">Sale Type</div><div className="font-bold text-gray-800">{property.saleType || "New"}</div></div>
                 </div>
 
+                {/* CTA Buttons */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+                  <button
+                    onClick={() => openLead("request-details")}
+                    className="flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 text-white py-3 rounded-xl font-semibold text-sm transition-colors"
+                  >
+                    <MessageCircle className="w-4 h-4" /> Request Details
+                  </button>
+                  <button
+                    onClick={() => openLead("best-price")}
+                    className="flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-xl font-semibold text-sm transition-colors"
+                  >
+                    <Tag className="w-4 h-4" /> Get Best Price
+                  </button>
+                  <button
+                    onClick={() => setBookingOpen(true)}
+                    className="flex items-center justify-center gap-2 border-2 border-green-700 text-green-700 hover:bg-green-50 py-3 rounded-xl font-semibold text-sm transition-colors"
+                  >
+                    <CalendarCheck className="w-4 h-4" /> Schedule Visit
+                  </button>
+                </div>
+
                 <h2 className="font-bold text-gray-900 text-lg mb-3">About this Property</h2>
                 <p className="text-gray-600 leading-relaxed whitespace-pre-line">{property.description}</p>
+
+                <button
+                  onClick={() => openLead("brochure")}
+                  className="mt-4 flex items-center gap-2 text-green-700 text-sm font-semibold hover:text-green-800 transition-colors"
+                >
+                  <FileText className="w-4 h-4" /> Download Brochure
+                </button>
               </div>
 
               {/* Tags */}
@@ -207,6 +255,9 @@ export default function PrithviPropertyDetail() {
                 </div>
               )}
 
+              {/* EMI Calculator */}
+              <EMICalculator defaultPrice={property.priceValue} />
+
               {/* Location Map */}
               {property.lat != null && property.lng != null && (
                 <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
@@ -233,31 +284,48 @@ export default function PrithviPropertyDetail() {
                       height="320px"
                     />
                   </Suspense>
-                  <p className="text-xs text-gray-400 mt-2">
-                    Map is approximate. Contact us for exact directions.
-                  </p>
+                  <p className="text-xs text-gray-400 mt-2">Map is approximate. Contact us for exact directions.</p>
                 </div>
               )}
             </div>
 
             {/* Right: Contact Card */}
             <div className="space-y-4">
-              {/* Price Card */}
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-24">
                 <div className="text-3xl font-bold text-green-700 mb-1">{property.price}</div>
                 {property.bookingAmount && (
-                  <p className="text-sm text-gray-500 mb-6">Booking: <strong className="text-gray-800">{property.bookingAmount}</strong></p>
+                  <p className="text-sm text-gray-500 mb-4">Booking: <strong className="text-gray-800">{property.bookingAmount}</strong></p>
                 )}
+
+                <div className="flex items-center gap-1.5 mb-5 text-xs text-green-700 font-semibold bg-green-50 border border-green-200 rounded-lg px-3 py-2">
+                  <BadgeCheck className="w-4 h-4" /> Verified Property Listing
+                </div>
+
                 <div className="space-y-3">
-                  <a href={`tel:${siteInfo.phone}`} className="w-full flex items-center justify-center gap-2 bg-green-700 text-white py-3.5 rounded-xl font-bold text-base hover:bg-green-800 transition-colors" data-testid="prithvi-detail-call">
-                    <Phone className="w-5 h-5" /> Call Now
-                  </a>
-                  <a href={`https://wa.me/${siteInfo.whatsapp.replace(/[^0-9]/g, "")}?text=Hi, I'm interested in ${encodeURIComponent(property.title)}`} target="_blank" rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 bg-emerald-600 text-white py-3.5 rounded-xl font-bold text-base hover:bg-emerald-700 transition-colors">
+                  <button
+                    onClick={() => openLead("request-details")}
+                    className="w-full flex items-center justify-center gap-2 bg-green-700 text-white py-3.5 rounded-xl font-bold text-base hover:bg-green-800 transition-colors"
+                  >
+                    <MessageCircle className="w-5 h-5" /> Request Details
+                  </button>
+                  <button
+                    onClick={() => setBookingOpen(true)}
+                    className="w-full flex items-center justify-center gap-2 bg-amber-500 text-white py-3.5 rounded-xl font-bold text-base hover:bg-amber-600 transition-colors"
+                  >
+                    <CalendarCheck className="w-5 h-5" /> Schedule Visit
+                  </button>
+                  <a
+                    href={`https://wa.me/${siteInfo.whatsapp.replace(/[^0-9]/g, "")}?text=Hi, I'm interested in ${encodeURIComponent(property.title)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 bg-emerald-600 text-white py-3.5 rounded-xl font-bold text-base hover:bg-emerald-700 transition-colors"
+                  >
                     <Phone className="w-5 h-5" /> WhatsApp
                   </a>
-                  <a href={`mailto:${siteInfo.email}?subject=Enquiry: ${encodeURIComponent(property.title)}`}
-                    className="w-full flex items-center justify-center gap-2 border-2 border-green-700 text-green-700 py-3.5 rounded-xl font-bold text-base hover:bg-green-50 transition-colors">
+                  <a
+                    href={`mailto:${siteInfo.email}?subject=Enquiry: ${encodeURIComponent(property.title)}`}
+                    className="w-full flex items-center justify-center gap-2 border-2 border-green-700 text-green-700 py-3.5 rounded-xl font-bold text-base hover:bg-green-50 transition-colors"
+                  >
                     <Mail className="w-5 h-5" /> Email Enquiry
                   </a>
                 </div>
@@ -295,6 +363,24 @@ export default function PrithviPropertyDetail() {
         </div>
       </main>
 
+      {/* Sticky bottom bar (mobile) */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 px-4 py-3 flex gap-3 md:hidden shadow-lg">
+        <a
+          href={`tel:${siteInfo.phone}`}
+          className="flex-1 flex items-center justify-center gap-2 bg-green-700 text-white py-3 rounded-xl font-bold text-sm"
+        >
+          <Phone className="w-4 h-4" /> Call Now
+        </a>
+        <a
+          href={`https://wa.me/${siteInfo.whatsapp.replace(/[^0-9]/g, "")}?text=Hi, I'm interested in ${encodeURIComponent(property.title)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 flex items-center justify-center gap-2 bg-emerald-600 text-white py-3 rounded-xl font-bold text-sm"
+        >
+          <Phone className="w-4 h-4" /> WhatsApp
+        </a>
+      </div>
+
       {/* Lightbox */}
       <AnimatePresence>
         {lightboxOpen && (
@@ -308,12 +394,7 @@ export default function PrithviPropertyDetail() {
               onClick={(e) => { e.stopPropagation(); setLightboxIndex((i) => (i - 1 + property.images.length) % property.images.length); }}>
               <ChevronLeft className="w-8 h-8" />
             </button>
-            <img
-              src={property.images[lightboxIndex]}
-              alt=""
-              className="max-w-[90vw] max-h-[85vh] object-contain rounded-xl"
-              onClick={(e) => e.stopPropagation()}
-            />
+            <img src={property.images[lightboxIndex]} alt="" className="max-w-[90vw] max-h-[85vh] object-contain rounded-xl" onClick={(e) => e.stopPropagation()} />
             <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-2 hover:bg-white/10 rounded-full"
               onClick={(e) => { e.stopPropagation(); setLightboxIndex((i) => (i + 1) % property.images.length); }}>
               <ChevronRight className="w-8 h-8" />
@@ -322,6 +403,24 @@ export default function PrithviPropertyDetail() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Lead Form Modal */}
+      <LeadFormModal
+        isOpen={leadModal.open}
+        onClose={() => setLeadModal((s) => ({ ...s, open: false }))}
+        trigger={leadModal.trigger}
+        propertyId={property.id}
+        propertyTitle={property.title}
+        propertyPrice={property.price}
+      />
+
+      {/* Visit Booking Modal */}
+      <VisitBookingModal
+        isOpen={bookingOpen}
+        onClose={() => setBookingOpen(false)}
+        propertyId={property.id}
+        propertyTitle={property.title}
+      />
 
       <PrithviFooter />
     </div>

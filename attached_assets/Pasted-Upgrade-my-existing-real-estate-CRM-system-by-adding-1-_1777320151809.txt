@@ -1,0 +1,186 @@
+Upgrade my existing real estate CRM system by adding:
+
+1. Lead Scoring (Hot / Warm / Cold)
+2. Analytics Dashboard (business insights)
+3. Property Performance Tracking
+
+IMPORTANT:
+
+* Do NOT break existing features
+* Extend current backend + admin dashboard cleanly
+* Keep UI consistent
+* Avoid overengineering
+
+---
+
+========================
+
+1. LEAD SCORING SYSTEM
+   ========================
+
+Update "leads" table:
+
+Add fields:
+
+* score (number, default 0)
+* temperature (string: "cold" | "warm" | "hot")
+* source (string: "form" | "whatsapp" | "brochure")
+
+---
+
+SCORING LOGIC:
+
+When a lead is created:
+
+* Base score = 10
+
+Add rules:
+
+* If user clicked "Schedule Visit" → +50
+* If lead message contains keywords:
+  ["urgent", "call me", "visit", "today"] → +30
+* If returning lead (same phone) → +20
+
+---
+
+TEMPERATURE MAPPING:
+
+* score >= 70 → "hot"
+* score >= 40 → "warm"
+* else → "cold"
+
+---
+
+BACKEND:
+
+* Apply scoring automatically on lead creation
+* Recalculate if lead updates
+
+---
+
+ADMIN UI:
+
+* Add colored badge in leads table:
+
+  * 🔴 Hot
+  * 🟡 Warm
+  * ⚪ Cold
+
+* Add filter:
+
+  * Show only Hot leads
+
+---
+
+========================
+2. ANALYTICS DASHBOARD
+======================
+
+Create a new tab: "Analytics"
+
+Display cards:
+
+* Total Leads (today / week / month)
+* Total Bookings
+* Conversion Rate:
+  bookings / leads
+
+---
+
+Add charts:
+
+1. Leads over time (daily)
+2. Bookings over time
+3. Lead temperature distribution (hot/warm/cold)
+
+---
+
+BACKEND ENDPOINT:
+
+GET /api/prithvi/analytics
+
+Return:
+{
+totalLeads,
+totalBookings,
+conversionRate,
+leadsByDay: [],
+bookingsByDay: [],
+temperatureStats: {
+hot,
+warm,
+cold
+}
+}
+
+---
+
+========================
+3. PROPERTY PERFORMANCE
+=======================
+
+Track property-level metrics:
+
+Update properties table:
+
+Add:
+
+* views (number)
+* leadsCount (number)
+* bookingsCount (number)
+
+---
+
+LOGIC:
+
+* Increment views when property page is opened
+* Increment leadsCount when lead is created for that property
+* Increment bookingsCount when booking is made
+
+---
+
+ADMIN UI:
+
+* Add "Performance" section in property table:
+
+Show per property:
+
+* Views
+* Leads
+* Bookings
+
+---
+
+========================
+4. FRONTEND CHANGES
+===================
+
+* Add Analytics tab in admin dashboard
+* Use simple charts (no heavy libraries if possible)
+* Use clean cards layout
+
+---
+
+========================
+5. OPTIONAL (if easy)
+=====================
+
+* Add date range filter (last 7 / 30 days)
+* Add export leads as CSV
+
+---
+
+OUTPUT:
+
+* Full backend implementation
+* Updated database schema
+* Admin dashboard UI updates
+* Clean, modular code
+
+---
+
+IMPORTANT:
+
+* Keep it lightweight
+* Avoid unnecessary dependencies
+* Make sure performance is good
