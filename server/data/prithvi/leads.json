@@ -1,6 +1,6 @@
 [
   {
-    "id": "lead-12003",
+    "id": "lead-359294",
     "agency": "prithvi",
     "name": "Hot Visitor",
     "phone": "9000000001",
@@ -12,51 +12,6 @@
     "score": 40,
     "temperature": "warm",
     "status": "new",
-    "createdAt": "2026-04-27T21:03:54.706Z"
-  },
-  {
-    "id": "lead-mohmwspv149eel11penh",
-    "agency": "prithvi",
-    "name": "Hot Visitor",
-    "phone": "9000000001",
-    "email": "",
-    "message": "urgent visit today",
-    "propertyId": "prithvi-1",
-    "propertyTitle": "DTCP Approved Residential Plot – T.Vadipatti",
-    "source": "visit",
-    "score": 110,
-    "temperature": "hot",
-    "status": "new",
-    "createdAt": "2026-04-27T14:43:12.931Z"
-  },
-  {
-    "id": "lead-mohmvj9bcxfp4095l5",
-    "agency": "prithvi",
-    "name": "Hot Visitor",
-    "phone": "9000000001",
-    "email": "",
-    "message": "urgent visit today",
-    "propertyId": "prithvi-1",
-    "propertyTitle": "DTCP Approved Residential Plot – T.Vadipatti",
-    "source": "form",
-    "score": 40,
-    "temperature": "warm",
-    "status": "new",
-    "createdAt": "2026-04-27T14:42:14.015Z"
-  },
-  {
-    "id": "lead-mohpm4fi6zaepvkxg5m",
-    "agency": "prithvi",
-    "name": "DB Lead",
-    "phone": "9999999999",
-    "email": "",
-    "message": "urgent visit today",
-    "propertyId": "prithvi-1",
-    "propertyTitle": "Test",
-    "source": "visit",
-    "score": 90,
-    "temperature": "hot",
-    "status": "new",
-    "createdAt": "2026-04-27T21:28:53.742Z"
+    "createdAt": "2026-04-27T21:56:19.877Z"
   }
 ]

@@ -123,6 +123,7 @@ async function getAllProperties(agency) {
           leadsCount: row.leads_count || 0,
           bookingsCount: row.bookings_count || 0,
           youtubeLinks: row.youtube_links || [],
+          panoramaScenes: row.panorama_scenes || null,
         }));
       }
     } catch (err) {
@@ -203,6 +204,7 @@ async function upsertProperty(agency, id, data) {
       views: data.views || 0,
       leads_count: data.leadsCount || 0,
       youtube_links: JSON.stringify(data.youtubeLinks || []),
+      panorama_scenes: data.panoramaScenes ? JSON.stringify(data.panoramaScenes) : null,
     };
 
     if (idx >= 0) {
@@ -214,7 +216,8 @@ async function upsertProperty(agency, id, data) {
             bedrooms = $10, bathrooms = $11, area = $12, property_type = $13,
             ownership = $14, sale_type = $15, project_name = $16, landmarks = $17::jsonb,
             nearby_places = $18::jsonb, tags = $19::jsonb, status = $20, featured = $21,
-            views = $22, leads_count = $23, youtube_links = $24::jsonb, updated_at = NOW()
+            views = $22, leads_count = $23, youtube_links = $24::jsonb,
+            panorama_scenes = $26::jsonb, updated_at = NOW()
         WHERE property_id = $25
       `;
       
@@ -224,7 +227,7 @@ async function upsertProperty(agency, id, data) {
         dbData.bedrooms, dbData.bathrooms, dbData.area, dbData.property_type,
         dbData.ownership, dbData.sale_type, dbData.project_name, dbData.landmarks,
         dbData.nearby_places, dbData.tags, dbData.status, dbData.featured,
-        dbData.views, dbData.leads_count, dbData.youtube_links, id
+        dbData.views, dbData.leads_count, dbData.youtube_links, id, dbData.panorama_scenes
       ]);
     } else {
       // Insert new
@@ -233,15 +236,15 @@ async function upsertProperty(agency, id, data) {
           property_id, agency_id, title, description, price, location, city,
           latitude, longitude, image_urls, features, bedrooms, bathrooms, area,
           property_type, ownership, sale_type, project_name, landmarks, nearby_places,
-          tags, status, featured, views, leads_count, youtube_links
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10::jsonb, $11::jsonb, $12, $13, $14, $15, $16, $17, $18, $19::jsonb, $20::jsonb, $21::jsonb, $22, $23, $24, $25, $26::jsonb)
+          tags, status, featured, views, leads_count, youtube_links, panorama_scenes
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10::jsonb, $11::jsonb, $12, $13, $14, $15, $16, $17, $18, $19::jsonb, $20::jsonb, $21::jsonb, $22, $23, $24, $25, $26::jsonb, $27::jsonb)
       `;
       
       await pool.query(insertQuery, [
         dbData.propertyId, dbData.agencyId, dbData.title, dbData.description, dbData.price, dbData.location, dbData.city,
         dbData.latitude, dbData.longitude, dbData.image_urls, dbData.features, dbData.bedrooms, dbData.bathrooms, dbData.area,
         dbData.property_type, dbData.ownership, dbData.sale_type, dbData.project_name, dbData.landmarks, dbData.nearby_places,
-        dbData.tags, dbData.status, dbData.featured, dbData.views, dbData.leads_count, dbData.youtube_links
+        dbData.tags, dbData.status, dbData.featured, dbData.views, dbData.leads_count, dbData.youtube_links, dbData.panorama_scenes
       ]);
     }
     

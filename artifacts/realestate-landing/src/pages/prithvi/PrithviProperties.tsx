@@ -216,9 +216,16 @@ export default function PrithviProperties() {
                               <span className="bg-green-700 text-white text-xs font-bold px-2.5 py-1 rounded-md">{p.type}</span>
                               <span className={`text-xs font-bold px-2.5 py-1 rounded-md ${p.status === "Available" ? "bg-emerald-100 text-emerald-800" : p.status === "Booking Open" ? "bg-amber-100 text-amber-800" : "bg-gray-100 text-gray-600"}`}>{p.status}</span>
                             </div>
-                            {p.youtubeLinks.length > 0 && (
-                              <div className="absolute bottom-3 right-3 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded flex items-center gap-1">▶ Video</div>
-                            )}
+                            <div className="absolute bottom-3 right-3 flex gap-2">
+                              {p.panoramaScenes && Object.keys(p.panoramaScenes.scenes || {}).length > 0 && (
+                                <div className="bg-green-700 text-white text-xs font-bold px-2 py-1 rounded flex items-center gap-1" title="360° Tour available">
+                                  <span>360°</span>
+                                </div>
+                              )}
+                              {p.youtubeLinks.length > 0 && (
+                                <div className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded flex items-center gap-1">▶ Video</div>
+                              )}
+                            </div>
                           </div>
                           <div className="p-5">
                             <h3 className="font-bold text-gray-900 text-base leading-snug mb-1 line-clamp-2">{p.title}</h3>

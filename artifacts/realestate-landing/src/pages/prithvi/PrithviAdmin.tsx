@@ -1,18 +1,20 @@
 import React, { useState, useRef, useEffect, lazy, Suspense } from "react";
 const LocationPicker = lazy(() => import("@/components/prithvi/LocationPicker"));
+const Panorama360Editor = lazy(() => import("@/components/prithvi/Panorama360Editor"));
 import { useLocation, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Building2, Users, UserCircle, Phone, Settings, Plus, Pencil, Trash2, Check, X,
   ChevronLeft, Image, Tag, LogOut, MapPin, Youtube, UserCheck, CalendarCheck,
-  RefreshCw, Mail, MessageSquare, BarChart2, TrendingUp, Eye, Download
+  RefreshCw, Mail, MessageSquare, BarChart2, TrendingUp, Eye, Download, Compass, ChevronRight
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import {
   usePrithvi, PrithviProperty, PrithviAgent, PrithviContactEntry, PrithviFounder,
-  PrithviPropertyType, PrithviPropertyStatus, LANDMARK_OPTIONS, generatePrithviId
+  PrithviPropertyType, PrithviPropertyStatus, PrithviPanoramaScenes,
+  LANDMARK_OPTIONS, generatePrithviId
 } from "@/store/prithviStore";
 import { isPrithviAuthed, setPrithviAuth } from "./PrithviAdminLogin";
 import prithviLogo from "@assets/prithvi_real_1776791750045.jpg";
@@ -65,15 +67,17 @@ function emptyProperty(): PrithviProperty {
     area: "", ownership: "Individual", saleType: "New", project: "",
     description: "", landmarks: [], nearbyPlaces: [], tags: [],
     images: [], youtubeLinks: [], featured: false,
-    lat: undefined, lng: undefined,
+    lat: undefined, lng: undefined, panoramaScenes: null,
   };
 }
 
 function PropertyForm({ initial, onSave, onCancel }: { initial: PrithviProperty; onSave: (p: PrithviProperty) => void; onCancel: () => void }) {
   const [form, setForm] = useState<PrithviProperty>(initial);
+  const [section, setSection] = useState<"details" | "tour360">("details");
   const [newTag, setNewTag] = useState("");
   const [newNearby, setNewNearby] = useState("");
   const set = <K extends keyof PrithviProperty>(k: K, v: PrithviProperty[K]) => setForm((f) => ({ ...f, [k]: v }));
+  const sceneCount = form.panoramaScenes ? Object.keys(form.panoramaScenes.scenes || {}).length : 0;
 
   const addImage = () => set("images", [...form.images, ""]);
   const setImage = (i: number, v: string) => set("images", form.images.map((x, idx) => idx === i ? v : x));
@@ -96,6 +100,63 @@ function PropertyForm({ initial, onSave, onCancel }: { initial: PrithviProperty;
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSave(form); }} className="space-y-6 bg-white border border-gray-200 rounded-2xl p-6">
+      {/* Section navigation */}
+      <div className="flex items-center gap-1 bg-gray-100 rounded-xl p-1 w-full sm:w-fit">
+        <button
+          type="button"
+          onClick={() => setSection("details")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            section === "details" ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-800"
+          }`}
+        >
+          <Building2 className="w-4 h-4" /> Property Details
+        </button>
+        <button
+          type="button"
+          onClick={() => setSection("tour360")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            section === "tour360" ? "bg-white text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-800"
+          }`}
+        >
+          <Compass className="w-4 h-4 text-green-600" /> 360° Tour Editor
+          {sceneCount > 0 && (
+            <span className="ml-1 bg-green-100 text-green-700 text-[11px] font-semibold px-1.5 py-0.5 rounded-full">
+              {sceneCount}
+            </span>
+          )}
+        </button>
+      </div>
+
+      {section === "tour360" ? (
+        <div className="space-y-2">
+          <div className="flex items-start justify-between flex-wrap gap-2">
+            <div>
+              <h3 className="text-base font-semibold text-gray-900 flex items-center gap-1.5">
+                <Compass className="w-4 h-4 text-green-600" /> Multi-Scene 360° Tour
+              </h3>
+              <p className="text-xs text-gray-500">
+                Upload up to 5 panorama images. Click on the viewer to add hotspots that link scenes together.
+              </p>
+            </div>
+          </div>
+          <Suspense fallback={<div className="text-sm text-gray-400 py-8 text-center">Loading 360° editor…</div>}>
+            <Panorama360Editor
+              value={form.panoramaScenes ?? null}
+              onChange={(next: PrithviPanoramaScenes | null) => set("panoramaScenes", next)}
+              maxScenes={5}
+            />
+          </Suspense>
+          <div className="flex gap-3 pt-4 border-t border-gray-100">
+            <Button type="submit" className="bg-green-700 hover:bg-green-800 flex items-center gap-2">
+              <Check className="w-4 h-4" /> Save Property
+            </Button>
+            <Button type="button" variant="outline" onClick={onCancel}>
+              <X className="w-4 h-4" /> Cancel
+            </Button>
+          </div>
+        </div>
+      ) : (
+      <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="md:col-span-2">
           <label className="text-sm font-medium text-gray-700 mb-1 block">Property Title</label>
@@ -324,6 +385,8 @@ function PropertyForm({ initial, onSave, onCancel }: { initial: PrithviProperty;
         <Button type="submit" className="bg-green-700 hover:bg-green-800 flex items-center gap-2"><Check className="w-4 h-4" /> Save Property</Button>
         <Button type="button" variant="outline" onClick={onCancel}><X className="w-4 h-4" /> Cancel</Button>
       </div>
+      </>
+      )}
     </form>
   );
 }

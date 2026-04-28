@@ -16,6 +16,25 @@ export const LANDMARK_OPTIONS = [
   "Hospital", "College", "Railway Station", "Highway", "Park",
 ];
 
+export interface PrithviHotSpot {
+  pitch: number;
+  yaw: number;
+  type: "scene";
+  text: string;
+  sceneId: string;
+}
+
+export interface PrithviPanoramaScene {
+  title: string;
+  panorama: string;
+  hotSpots: PrithviHotSpot[];
+}
+
+export interface PrithviPanoramaScenes {
+  scenes: Record<string, PrithviPanoramaScene>;
+  firstScene?: string;
+}
+
 export interface PrithviProperty {
   id: string;
   title: string;
@@ -39,6 +58,7 @@ export interface PrithviProperty {
   featured: boolean;
   lat?: number;
   lng?: number;
+  panoramaScenes?: PrithviPanoramaScenes | null;
 }
 
 export interface PrithviAgent {
@@ -175,6 +195,39 @@ function normalizePrithviSiteInfo(raw: unknown): PrithviSiteInfo {
   };
 }
 
+function normalizePanoramaScenes(raw: unknown): PrithviPanoramaScenes | null {
+  if (!raw || typeof raw !== "object") return null;
+  const obj = raw as Record<string, unknown>;
+  const scenesRaw = (obj.scenes ?? {}) as Record<string, unknown>;
+  if (!scenesRaw || typeof scenesRaw !== "object") return null;
+  const scenes: Record<string, PrithviPanoramaScene> = {};
+  for (const [id, sceneRaw] of Object.entries(scenesRaw)) {
+    if (!sceneRaw || typeof sceneRaw !== "object") continue;
+    const s = sceneRaw as Record<string, unknown>;
+    const panorama = asString(s.panorama);
+    if (!panorama) continue;
+    const hotSpotsRaw = Array.isArray(s.hotSpots) ? (s.hotSpots as unknown[]) : [];
+    const hotSpots: PrithviHotSpot[] = hotSpotsRaw
+      .map((h): PrithviHotSpot | null => {
+        if (!h || typeof h !== "object") return null;
+        const hr = h as Record<string, unknown>;
+        const pitch = Number(hr.pitch);
+        const yaw = Number(hr.yaw);
+        if (!Number.isFinite(pitch) || !Number.isFinite(yaw)) return null;
+        return {
+          pitch, yaw, type: "scene",
+          text: asString(hr.text),
+          sceneId: asString(hr.sceneId),
+        };
+      })
+      .filter((x): x is PrithviHotSpot => x !== null);
+    scenes[id] = { title: asString(s.title) || id, panorama, hotSpots };
+  }
+  if (Object.keys(scenes).length === 0) return null;
+  const firstScene = asString(obj.firstScene) || Object.keys(scenes)[0];
+  return { scenes, firstScene };
+}
+
 function normalizePrithviProperty(raw: unknown): PrithviProperty {
   const r = (raw ?? {}) as Record<string, unknown>;
   const id = asString(r.id ?? r.property_id ?? r.propertyId, generatePrithviId());
@@ -206,6 +259,7 @@ function normalizePrithviProperty(raw: unknown): PrithviProperty {
     featured: Boolean(r.featured),
     lat: typeof r.lat === "number" ? r.lat : (typeof r.latitude === "number" ? r.latitude : undefined),
     lng: typeof r.lng === "number" ? r.lng : (typeof r.longitude === "number" ? r.longitude : undefined),
+    panoramaScenes: normalizePanoramaScenes(r.panoramaScenes ?? r.panorama_scenes),
   };
 }
 
@@ -270,15 +324,15 @@ export function PrithviProvider({ children }: { children: ReactNode }) {
   const [siteInfo, setSiteInfoState] = useState<PrithviSiteInfo>(defaultSiteInfo);
   const [isLoading, setIsLoading] = useState(true);
 
-	useEffect(() => {
-		Promise.all([
-			api.getProperties("prithvi").then((d) => setPropertiesState((d as unknown[]).map(normalizePrithviProperty))).catch(() => {}),
-			api.getConfig<unknown>("prithvi", "founder").then((d) => setFounderState(normalizePrithviFounder(d))).catch(() => {}),
-			api.getConfig<unknown>("prithvi", "agents").then((d) => setAgentsState(Array.isArray(d) ? (d as PrithviAgent[]) : [])).catch(() => {}),
-			api.getConfig<unknown>("prithvi", "contacts").then((d) => setContactsState(Array.isArray(d) ? (d as PrithviContactEntry[]) : [])).catch(() => {}),
-			api.getConfig<unknown>("prithvi", "siteInfo").then((d) => setSiteInfoState(normalizePrithviSiteInfo(d))).catch(() => {}),
-		]).finally(() => setIsLoading(false));
-	}, []);
+        useEffect(() => {
+                Promise.all([
+                        api.getProperties("prithvi").then((d) => setPropertiesState((d as unknown[]).map(normalizePrithviProperty))).catch(() => {}),
+                        api.getConfig<unknown>("prithvi", "founder").then((d) => setFounderState(normalizePrithviFounder(d))).catch(() => {}),
+                        api.getConfig<unknown>("prithvi", "agents").then((d) => setAgentsState(Array.isArray(d) ? (d as PrithviAgent[]) : [])).catch(() => {}),
+                        api.getConfig<unknown>("prithvi", "contacts").then((d) => setContactsState(Array.isArray(d) ? (d as PrithviContactEntry[]) : [])).catch(() => {}),
+                        api.getConfig<unknown>("prithvi", "siteInfo").then((d) => setSiteInfoState(normalizePrithviSiteInfo(d))).catch(() => {}),
+                ]).finally(() => setIsLoading(false));
+        }, []);
 
   const setProperties = (p: PrithviProperty[]) => setPropertiesState(p);
   const addProperty = (p: PrithviProperty) => {

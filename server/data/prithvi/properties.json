@@ -22,13 +22,44 @@
     "tags": [],
     "status": "Sold",
     "featured": false,
-    "views": 0,
+    "views": 2,
     "leadsCount": 0,
     "bookingsCount": 0,
     "youtubeLinks": [],
+    "panoramaScenes": {
+      "scenes": {
+        "scene-mohv8z7yxx8e": {
+          "title": "jeanne-rose-gomez-Mi2r_KjkW8o-unsplash",
+          "panorama": "/uploads/360/mohv8wh4bzc1wo4xqb.jpg",
+          "hotSpots": [
+            {
+              "pitch": -15.68,
+              "yaw": 14.04,
+              "type": "scene",
+              "text": "new",
+              "sceneId": "scene-mohv9o0bf9kc"
+            }
+          ]
+        },
+        "scene-mohv9o0bf9kc": {
+          "title": "allphoto-bangkok-FTMEoTTin1E-unsplash",
+          "panorama": "/uploads/360/mohv9l3d7v4b9kup5ys.jpg",
+          "hotSpots": [
+            {
+              "pitch": -52.66,
+              "yaw": 63.09,
+              "type": "scene",
+              "text": "next",
+              "sceneId": "scene-mohv8z7yxx8e"
+            }
+          ]
+        }
+      },
+      "firstScene": "scene-mohv8z7yxx8e"
+    },
     "priceValue": 800000,
     "bookingAmount": "",
-    "updatedAt": "2026-04-27T21:38:19.969Z"
+    "updatedAt": "2026-04-28T00:07:43.763Z"
   },
   {
     "id": "prithvi-1",
@@ -56,7 +87,8 @@
     "views": 0,
     "leadsCount": 1,
     "bookingsCount": 0,
-    "youtubeLinks": []
+    "youtubeLinks": [],
+    "panoramaScenes": null
   },
   {
     "id": "prithvi-004",
@@ -84,7 +116,8 @@
     "views": 0,
     "leadsCount": 0,
     "bookingsCount": 0,
-    "youtubeLinks": []
+    "youtubeLinks": [],
+    "panoramaScenes": null
   },
   {
     "id": "prithvi-003",
@@ -112,7 +145,8 @@
     "views": 1,
     "leadsCount": 0,
     "bookingsCount": 0,
-    "youtubeLinks": []
+    "youtubeLinks": [],
+    "panoramaScenes": null
   },
   {
     "id": "prithvi-002",
@@ -140,7 +174,8 @@
     "views": 1,
     "leadsCount": 0,
     "bookingsCount": 0,
-    "youtubeLinks": []
+    "youtubeLinks": [],
+    "panoramaScenes": null
   },
   {
     "id": "prithvi-001",
@@ -168,6 +203,7 @@
     "views": 0,
     "leadsCount": 0,
     "bookingsCount": 0,
-    "youtubeLinks": []
+    "youtubeLinks": [],
+    "panoramaScenes": null
   }
 ]

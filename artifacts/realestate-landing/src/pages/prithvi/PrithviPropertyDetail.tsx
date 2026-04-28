@@ -11,6 +11,7 @@ import PrithviFooter from "@/components/prithvi/PrithviFooter";
 import LeadFormModal from "@/components/prithvi/LeadFormModal";
 import VisitBookingModal from "@/components/prithvi/VisitBookingModal";
 import EMICalculator from "@/components/prithvi/EMICalculator";
+const Panorama360Viewer = lazy(() => import("@/components/prithvi/Panorama360Viewer"));
 import { usePrithvi, parseYouTubeEmbed, getYouTubeThumbnail } from "@/store/prithviStore";
 import { api } from "@/api/client";
 
@@ -165,6 +166,24 @@ export default function PrithviPropertyDetail() {
                   </div>
                 )}
               </div>
+
+              {/* 360° Virtual Tour */}
+              {property.panoramaScenes && Object.keys(property.panoramaScenes.scenes || {}).length > 0 && (
+                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                  <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <h2 className="font-bold text-gray-900 text-lg flex items-center gap-2">
+                      <span className="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">360°</span>
+                      Virtual Tour
+                    </h2>
+                    <p className="text-xs text-gray-500">
+                      {Object.keys(property.panoramaScenes.scenes).length} scene{Object.keys(property.panoramaScenes.scenes).length === 1 ? "" : "s"} · drag to look around · click hotspots to navigate
+                    </p>
+                  </div>
+                  <Suspense fallback={<div className="h-[460px] bg-gray-100 rounded-xl flex items-center justify-center text-sm text-gray-400">Loading 360° tour…</div>}>
+                    <Panorama360Viewer data={property.panoramaScenes} height={460} />
+                  </Suspense>
+                </div>
+              )}
 
               {/* Property Info */}
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">

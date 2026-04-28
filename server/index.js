@@ -23,8 +23,27 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // ─── Static: uploaded images ────────────────────────────────────────────────
+// Uploaded files use unique IDs in their filenames, so they're effectively immutable —
+// safe to cache aggressively. This is critical for 360° panoramas (multi-MB) so
+// repeat views and scene transitions on mobile don't re-download the same image.
 const UPLOADS_DIR = path.join(__dirname, "uploads");
-app.use("/uploads", express.static(UPLOADS_DIR));
+app.use(
+  "/uploads",
+  express.static(UPLOADS_DIR, {
+    maxAge: "30d",
+    immutable: true,
+    etag: true,
+    lastModified: true,
+    setHeaders: (res, filePath) => {
+      // 30-day public cache; immutable filenames mean we don't need revalidation.
+      res.setHeader("Cache-Control", "public, max-age=2592000, immutable");
+      // Tell browsers/proxies to fetch a Range slice when supported (Pannellum does this for big jpgs)
+      res.setHeader("Accept-Ranges", "bytes");
+      // Help mobile browsers cross-origin (preview iframe is on a different host than the API)
+      res.setHeader("Access-Control-Allow-Origin", "*");
+    },
+  })
+);
 
 // ─── API Routes ─────────────────────────────────────────────────────────────
 app.use("/api/upload", uploadRouter);

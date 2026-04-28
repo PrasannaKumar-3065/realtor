@@ -102,6 +102,16 @@ export const api = {
     return json.url as string;
   },
 
+  // Upload a 360° panorama image (saved under /uploads/360/)
+  uploadPanorama: async (file: File): Promise<string> => {
+    const form = new FormData();
+    form.append("file", file);
+    const res = await fetch(`${API_BASE}/api/upload/360`, { method: "POST", body: form });
+    if (!res.ok) throw new Error("Panorama upload failed");
+    const json = await res.json();
+    return json.url as string;
+  },
+
   // Export leads as CSV
   exportLeadsCSV: (leads: Lead[]): void => {
     const header = ["Name", "Phone", "Email", "Property", "Source", "Score", "Temperature", "Status", "Date", "Message"];
